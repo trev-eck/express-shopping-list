@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const PORT = 3000;
 const app = express();
 
@@ -7,8 +8,11 @@ const items = ["bacon"];
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static("public"));
+
 app.get("/", (req, res) => {
-    res.send("welcome!");
+    res.sendFile(path.join(__dirname,"index.html"));
+    //res.send("welcome!");
 })
 
 app.get("/api/items", (req, res) => {
